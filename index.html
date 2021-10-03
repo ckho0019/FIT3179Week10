@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Visualization Week 10</title>
+
+  <!-- Import Vega & Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+    }
+    
+    </style>
+</head>
+
+<body style="background-color: #edf2fb; padding-left: 16px;">
+  <h1 style="font-size: 50px; color:black; font-family: Trebuchet MS;">Forbes Billionaires of 2021</h1>
+  <div class="row">
+    <div class="column">
+      <div id="map"></div>
+    </div>
+    <div class="column">
+      <div id="scatter"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+    var spec = "js/map.vg.json";
+    vegaEmbed('#map', spec).then(function(result){}).catch(console.error);
+
+    var spec1 = "js/scatter.vg.json";
+    vegaEmbed('#scatter', spec1).then(function(result){}).catch(console.error);
+  </script>
+
+</body>
+</html>

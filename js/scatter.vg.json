@@ -1,0 +1,110 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/ckho0019/FIT3179Week10/main/data/billionaire.csv"
+    },
+    "params": [
+      {
+        "name": "Select_Region",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Africa",
+            "Asia",
+            "Europe",
+            "Middle East",
+            "North America",
+            "South America"
+          ],
+          "labels": [
+            "Show All",
+            "Africa",
+            "Asia",
+            "Europe",
+            "Middle East",
+            "North America",
+            "South America"
+          ],
+          "name": "Select Region: "
+        }
+      }
+    ],
+    "transform": [
+      {"filter": "Select_Region == null || datum.Region == Select_Region"}
+    ],
+  
+    "hconcat": [
+      {
+        "params": [
+          {
+            "name": "region_highlight",
+            "select": {"type": "point", "fields": ["Region"]},
+            "bind": "legend"
+          }
+        ],
+        "mark": {"type": "point", "filled": true},
+        "title": {
+          "text": "Net Worth Against Age",
+          "color": "black",
+          "fontWeight": "bold",
+          "fontSize": 20,
+          "offset": 50
+        },
+        "height": 300,
+        "width": 500,
+        "encoding": {
+          "x": {
+            "field": "Age",
+            "type": "quantitative",
+            "scale": {"domain": [10, 100]},
+            "title": "Age"
+          },
+          "y": {
+            "field": "NetWorth",
+            "type": "quantitative",
+            "title": "Net Worth (b)"
+          },
+          "tooltip": [
+            {"field": "Name", "type": "nominal"},
+            {"field": "Age", "type": "quantitative"},
+            {"field": "NetWorth", "type": "quantitative", "title": "Net Worth (b)"},
+            {"field": "Region", "type": "nominal"}
+          ],
+          "color": {"field": "Region", "type": "nominal"},
+          "opacity": {
+            "condition": {"param": "region_highlight", "value": 1},
+            "value": 0
+          }
+        }
+      }
+    ],
+    "resolve": {"legend": {"color": "independent"}},
+    "config": {
+      "background": "#edf2fb",
+      "axis": {
+        "labelPadding": 10,
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "titlePadding": 10,
+        "grid": false
+      },
+      "view": {
+        "stroke": "transparent"
+      },
+      "text": {
+        "fontSize": 18
+      },
+      "legend": {
+        "labelFontSize": 12,
+        "titleFontSize": 15
+      },
+      "title": {
+        "fontSize": 24
+      },
+      "concat": {
+        "spacing": 10
+      }
+    }
+  }
+  
